@@ -35,7 +35,6 @@ public class mouvement : MonoBehaviour
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
             GetComponent<Animator>().SetBool("walk", true);
-            Debug.Log("je marche");
         }
         else
         {
