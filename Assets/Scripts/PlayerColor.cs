@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerColor : MonoBehaviour
 {
+    public Color materialColor = new Color(1f, 0f, 0f, 1f);
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,6 @@ public class PlayerColor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Renderer>().material.color = new Color(1f, 0f, 0f, 1f);
+        GetComponent<Renderer>().material.color = materialColor;
     }
 }

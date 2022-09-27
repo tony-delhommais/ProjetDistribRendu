@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.ConstrainedExecution;
 using Unity.Netcode;
 using Unity.Netcode.Components;
 using UnityEngine;
+using UnityEngine.AI;
 
 public struct ScoreMapping : INetworkSerializable, System.IEquatable<ScoreMapping>
 {
@@ -33,6 +35,8 @@ public struct ScoreMapping : INetworkSerializable, System.IEquatable<ScoreMappin
 
 public class GameController : NetworkBehaviour
 {
+    NetworkManager networkManager;
+
     [SerializeField]
     GameObject winAreaPrefab;
 
@@ -40,27 +44,60 @@ public class GameController : NetworkBehaviour
 
     NetworkList<ScoreMapping> playerScore;
 
+    GameObject[] spawnPointList;
+
+    PlayerController[] playerControllers;
+
+
     private void Awake()
     {
+        networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
+
         playerScore = new NetworkList<ScoreMapping>();
+
+        spawnPointList = GameObject.FindGameObjectsWithTag("SpawnPoint");
+
+        playerControllers = new PlayerController[spawnPointList.Length];
+        for (int i = 0; i < spawnPointList.Length; i++)
+            playerControllers[i] = null;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         if (!winAreaPrefab)
             Debug.LogError("WinAreaPrefab not set");
     }
 
-    bool PlayerIdExistInScoreList(ulong p_playerId)
+    public int AddPlayer(PlayerController playerController)
     {
-        for(int i = 0; i < playerScore.Count; i++)
+        int i;
+        for (i = 0; i < playerControllers.Length; i++)
         {
-            if (playerScore[i].PlayerId == p_playerId)
-                return true;
+            if (!playerControllers[i])
+                break;
         }
 
-        return false;
+        if (i == playerControllers.Length)
+            return -1;
+
+        playerControllers[i] = playerController;
+        return i;
+    }
+
+    public void RemovePlayer(int id)
+    {
+        if (id < 0 || id >= playerControllers.Length)
+            return;
+
+        playerControllers[id] = null;
+    }
+
+    public Vector3 GetSpawnPointPosition(int p_spawnPointId)
+    {
+        if(p_spawnPointId < 0 || p_spawnPointId >= spawnPointList.Length)
+            p_spawnPointId = 0;
+
+        return spawnPointList[p_spawnPointId].transform.position;
     }
 
     void IncrementPlayerScore(ulong p_playerId)
@@ -116,18 +153,31 @@ public class GameController : NetworkBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (IsServer)
         {
-            if (!winAreaInstance)
+            if (!winAreaInstance && winAreaPrefab)
             {
                 winAreaInstance = Instantiate(winAreaPrefab);
 
-                winAreaInstance.transform.position = new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10));
+                winAreaInstance.transform.position = RandomNavmeshLocation(100f);
 
                 winAreaInstance.GetComponent<NetworkObject>().Spawn();
             }
         }
+    }
+
+    public Vector3 RandomNavmeshLocation(float radius)
+    {
+        Vector3 randomDirection = Random.insideUnitSphere * radius;
+        randomDirection += transform.position;
+        NavMeshHit hit;
+        Vector3 finalPosition = Vector3.zero;
+        if (NavMesh.SamplePosition(randomDirection, out hit, radius, 1))
+        {
+            finalPosition = hit.position;
+        }
+        return finalPosition;
     }
 }

@@ -6,11 +6,11 @@ using UnityEngine;
 public class ColorChoose : MonoBehaviour
 {
     [SerializeField] private GameObject character;
+    MenuScript menuScript;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        menuScript = GameObject.FindGameObjectWithTag("Canca").GetComponent<MenuScript>();
     }
 
     // Update is called once per frame
@@ -20,6 +20,8 @@ public class ColorChoose : MonoBehaviour
     }
     void ChangeColor()
     {
-        character.GetComponentInChildren<Renderer>().material.color = GetComponent<Image>().color; 
+        character.GetComponentInChildren<PlayerColor>().materialColor = GetComponent<Image>().color;
+
+        if (menuScript) menuScript.targetPlayerColor = GetComponent<Image>().color;
     }
 }

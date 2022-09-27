@@ -20,18 +20,7 @@ public class NetworkUI : MonoBehaviour
     {
         GUILayout.BeginArea(new Rect(10, 10, 300, 100));
 
-        if(!networkManager.IsServer && !networkManager.IsClient)
-        {
-            if (GUILayout.Button("HOST"))
-                networkManager.StartHost();
-
-            if (GUILayout.Button("SERVER"))
-                networkManager.StartServer();
-
-            if (GUILayout.Button("CLIENT"))
-                networkManager.StartClient();
-        }
-        else if(networkManager.IsClient)
+        if(networkManager.IsClient)
         {
             GUILayout.Label(gameController.GetScoreFromClientId(networkManager.LocalClientId).ToString());
         }

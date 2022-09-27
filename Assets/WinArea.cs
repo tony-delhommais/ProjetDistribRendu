@@ -8,21 +8,20 @@ using UnityEngine;
 
 public class WinArea : NetworkBehaviour
 {
-    NetworkManager networkManager;
     GameController gameController;
 
     public NetworkVariable<Vector3> areaPosition = new NetworkVariable<Vector3>();
     
     private void Awake()
     {
-        networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(IsOwner)
+        if(IsOwner && IsServer)
         {
+            
             if(other.gameObject.tag == "Player")
             {
                 gameController.PlayerCollideWithWinArea(other.gameObject.GetComponent<PlayerController>().GetLocalClientId());
@@ -32,7 +31,7 @@ public class WinArea : NetworkBehaviour
 
     private void Update()
     {
-        if(IsOwner)
+        if(IsServer)
         {
             areaPosition.Value = transform.position;
         }

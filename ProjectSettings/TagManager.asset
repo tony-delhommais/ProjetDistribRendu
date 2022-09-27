@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - NetworkManager
+  - SpawnPoint
+  - Canca
   layers:
   - Default
   - TransparentFX
