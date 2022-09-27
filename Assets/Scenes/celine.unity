@@ -122,7 +122,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 23800000, guid: a318983f65654f24597fde237e99c21d, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 846314e67030df24da17db2c97e6e6e6, type: 2}
 --- !u!1 &345088183
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,14 +526,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 946031825}
-  m_LocalRotation: {x: -0.5, y: 0.5, z: 0.5, w: 0.5}
-  m_LocalPosition: {x: 9.139, y: 0.86, z: 20.39}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 10.759, y: 0.938, z: 24.09}
   m_LocalScale: {x: -0.0676469, y: 1, z: -0.070853}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &1063690352
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,7 +872,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1809055598}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: 0, z: -5}
+  m_LocalPosition: {x: -17.2, y: 0, z: -1.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1024,6 +1024,23 @@ Transform:
   m_Father: {fileID: 345088184}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2039563008 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7038177357100004644, guid: 3faeea6b1aa361044ae3553453ebd7e3, type: 3}
+  m_PrefabInstance: {fileID: 2901750851812127666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2039563010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2039563008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e79aee79341e54396b938b32e73edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2060314118
 GameObject:
   m_ObjectHideFlags: 0
@@ -1328,6 +1345,10 @@ PrefabInstance:
     - target: {fileID: 2901750853703457330, guid: 3faeea6b1aa361044ae3553453ebd7e3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5663203149550664488, guid: 3faeea6b1aa361044ae3553453ebd7e3, type: 3}
+      propertyPath: m_RootOrder
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3faeea6b1aa361044ae3553453ebd7e3, type: 3}

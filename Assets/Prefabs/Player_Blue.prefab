@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2901750853679934064, guid: 3faeea6b1aa361044ae3553453ebd7e3, type: 3}
       propertyPath: m_Name
-      value: Player 1
+      value: Player_Blue
+      objectReference: {fileID: 0}
+    - target: {fileID: 2901750853679934065, guid: 3faeea6b1aa361044ae3553453ebd7e3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2901750853679934070, guid: 3faeea6b1aa361044ae3553453ebd7e3, type: 3}
       propertyPath: m_RootOrder
