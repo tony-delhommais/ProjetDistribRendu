@@ -34,7 +34,12 @@ public class mouvement : MonoBehaviour
 
         if (Input.GetAxis("Vertical") != 0 || Input.GetAxis("Horizontal") != 0)
         {
-           // this.GetComponent<Animator>.
+            GetComponent<Animator>().SetBool("walk", true);
+            Debug.Log("je marche");
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("walk", false);
         }
 
         moveDirection = new Vector3(-Input.GetAxis("Vertical"), 0, 0 );
